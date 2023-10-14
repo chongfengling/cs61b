@@ -158,6 +158,17 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        //return true if any of the tiles in the board
+        //are equal to the winning tile value 2048
+        int size_of_board = b.size();
+        for (int col = 0; col < size_of_board; col += 1){
+            for (int row = 0; row < size_of_board; row += 1){
+                Tile digit = b.tile(col, row);
+                if (digit != null && digit.value() == MAX_PIECE){
+                    return  true;
+                }
+            }
+        }
         return false;
     }
 
