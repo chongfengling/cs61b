@@ -180,6 +180,23 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        // check there is a empty space
+        if (emptySpaceExists(b)){
+            return true;
+        }
+        // check if there are two equal adjacent tiles
+        boolean same_adjacent = false;
+        for (int col = 0; col < b.size(); col += 1){
+            for (int row = 0; row < b.size(); row +=1){
+                int current_value = b.tile(col, row).value();
+                int down_value = (row == 3) ? -1 : b.tile(col, row + 1).value(); // Assign -1 if row is 3, otherwise use someDefaultValue
+                int right_value = (col == 3) ? -1 : b.tile(col + 1, row).value(); // Assign -1 if col is 3, otherwise use someDefaultValue
+                if (current_value == down_value || current_value == right_value){
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
