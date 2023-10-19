@@ -114,6 +114,44 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
 
+        // set view to the corresponding direction
+        this.board.startViewingFrom(side);
+        for (int col = 0; col < this.board.size(); col += 1){
+            int changeable_row = this.board.size() - 1;
+            for (int row = 3; row >= 0; row -= 1){
+                // ignore the null tile and the first tile as it does not affect changeable_row
+                if (this.board.tile(col, row) == null || row == 3){
+                    continue;
+                }
+                // when the current tile and changeable tile are not null
+                if (this.board.tile(col, row) != null
+                        && this.board.tile(col, changeable_row) != null){
+                    // if these two tiles have different values, MOVE
+                    if (this.board.tile(col, row).value() != this.board.tile(col, changeable_row).value()){
+                        changeable_row -= 1;
+                        Tile t = this.board.tile(col, row);
+                        this.board.move(col, changeable_row, t);
+                    }else{ // Same value. MERGE
+                        Tile t = this.board.tile(col, row);
+                        this.board.move(col, changeable_row, t);
+                        // update the score
+                        this.score += t.value() * 2;
+                        changeable_row -= 1;
+                    }
+                    changed = true;
+                }
+                // when the current tile is not null but changeable tile is null, MOVE
+                if (this.board.tile(col, row) != null
+                        && this.board.tile(col, changeable_row) == null){
+                    Tile t = this.board.tile(col, row);
+                    this.board.move(col, changeable_row, t);
+                    changed = true;
+                }
+            }
+        }
+        // reset to NORTH
+        this.board.setViewingPerspective(Side.NORTH);
+
         checkGameOver();
         if (changed) {
             setChanged();
@@ -138,6 +176,16 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        // return true if any of the tiles in the given board are null
+        int size_of_board = b.size();
+        for (int col = 0; col < size_of_board; col += 1){
+            for (int row = 0; row < size_of_board; row += 1){
+                Tile digit = b.tile(col, row);
+                if (digit == null){
+                    return  true;
+                }
+            }
+        }
         return false;
     }
 
@@ -148,6 +196,17 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        //return true if any of the tiles in the board
+        //are equal to the winning tile value 2048
+        int size_of_board = b.size();
+        for (int col = 0; col < size_of_board; col += 1){
+            for (int row = 0; row < size_of_board; row += 1){
+                Tile digit = b.tile(col, row);
+                if (digit != null && digit.value() == MAX_PIECE){
+                    return  true;
+                }
+            }
+        }
         return false;
     }
 
@@ -159,6 +218,23 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        // check there is a empty space
+        if (emptySpaceExists(b)){
+            return true;
+        }
+        // check if there are two equal adjacent tiles
+        boolean same_adjacent = false;
+        for (int col = 0; col < b.size(); col += 1){
+            for (int row = 0; row < b.size(); row +=1){
+                int current_value = b.tile(col, row).value();
+                int down_value = (row == 3) ? -1 : b.tile(col, row + 1).value(); // Assign -1 if row is 3, otherwise use someDefaultValue
+                int right_value = (col == 3) ? -1 : b.tile(col + 1, row).value(); // Assign -1 if col is 3, otherwise use someDefaultValue
+                if (current_value == down_value || current_value == right_value){
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
