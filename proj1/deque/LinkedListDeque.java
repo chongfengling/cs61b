@@ -90,4 +90,18 @@ public class LinkedListDeque<T> {
         System.out.println();
     }
 
+    // 0 is front while 1 is the next item
+    public T get(int index){
+        if (index >= size || index < 0){
+            return  null;
+        }
+
+        int pos = 0;
+        IntNode currentNode = sentinel.next;
+        while (pos != index){
+            pos += 1;
+            currentNode = currentNode.next;
+        }
+        return currentNode.item;
+    }
 }
