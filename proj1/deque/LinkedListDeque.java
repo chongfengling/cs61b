@@ -1,18 +1,18 @@
 package deque;
 
 public class LinkedListDeque<T> {
-    private class IntNode { // static or not?
-        public IntNode prev;
-        public T item;
-        public IntNode next;
+    private class node { // static or not?
+        private node prev;
+        private final T item;
+        private node next;
 
-        public IntNode(IntNode i, T x, IntNode j) {
+        private node(node i, T x, node j) {
             prev = i;
             item = x;
             next = j;
         }
 
-        public IntNode(T x){
+        private node(T x){
             item = x;
             prev = this;
             next = this;
@@ -21,15 +21,15 @@ public class LinkedListDeque<T> {
     }
 
     private int size = 0;
-    private IntNode sentinel;
+    private final node sentinel;
 
     public LinkedListDeque(){
-        sentinel = new IntNode(null);
+        sentinel = new node(null);
     }
 
     public  void addFirst(T item){
         size += 1;
-        IntNode firstNode = new IntNode(item);
+        node firstNode = new node(item);
         firstNode.prev = sentinel;
         firstNode.next = sentinel.next;
         firstNode.next.prev = firstNode;
@@ -42,7 +42,7 @@ public class LinkedListDeque<T> {
 
     public void addLast(T item){
         size += 1;
-        IntNode lastNode = new IntNode(item);
+        node lastNode = new node(item);
         lastNode.next = sentinel;
         lastNode.prev = sentinel.prev;
         lastNode.prev.next = lastNode;
@@ -82,7 +82,7 @@ public class LinkedListDeque<T> {
     }
 
     public void printDeque(){
-        IntNode p = sentinel.next;
+        node p = sentinel.next;
         while (p != sentinel){
             System.out.print(p.item + " ");
             p = p.next;
@@ -97,7 +97,7 @@ public class LinkedListDeque<T> {
         }
 
         int pos = 0;
-        IntNode currentNode = sentinel.next;
+        node currentNode = sentinel.next;
         while (pos != index){
             pos += 1;
             currentNode = currentNode.next;
