@@ -1,21 +1,21 @@
 package deque;
 
-public class ArrayDeque {
+public class ArrayDeque<T> {
 
-    private int[] items;
+    private T[] items;
     private int size;
     private int nextFirst; // nonzero
     private int nextLast;
 
     public ArrayDeque(){
-        items = new int[6];
+        items = (T []) new Object[6];
         size = 0;
         // circular ArrayDeque
         nextFirst = 1;
         nextLast = 2;
     }
 
-    public void addFirst(int item){
+    public void addFirst(T item){
         if (nextFirst < 0){ // at this time; nextLast - nextFirst = items.length - 1
             resize(size + 10);
         }
@@ -25,7 +25,7 @@ public class ArrayDeque {
         size += 1;
     }
 
-    public void addLast(int item){
+    public void addLast(T item){
         if (nextLast >= items.length){
             resize(size + 10);
         }
@@ -36,12 +36,20 @@ public class ArrayDeque {
 
     // from [x x 0] or [0 x x] to [0 0 x x 0]
     private void resize(int capacity){
-        int[] tmpItems = new int[capacity];
+        T[] tmpItems = (T []) new Object[capacity];
         int space = (int) (capacity - size) / 2;
         System.arraycopy(items, 0, tmpItems, space, size);
         items = tmpItems;
         nextFirst += space;
         nextLast += space;
+    }
+
+    public void add(int item){
+
+    }
+
+    public void remove(int index){
+
     }
 
     public boolean isEmpty(){
@@ -61,7 +69,7 @@ public class ArrayDeque {
         System.out.println();
     }
 
-    public Integer removeFirst(){
+    public T removeFirst(){
         if (size > 0){
             nextFirst += 1;
             size += -1;
@@ -72,7 +80,7 @@ public class ArrayDeque {
 
     }
 
-    public Integer removeLast(){
+    public T removeLast(){
         if (size > 0){
             nextLast -= 1;
             size += -1;
@@ -82,7 +90,7 @@ public class ArrayDeque {
         }
 
     }
-    public Integer get(int index) {
+    public T get(int index) {
         if (index >= 0 && index < size) {
             return items[index + nextFirst + 1];
         }else {

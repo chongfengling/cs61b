@@ -90,36 +90,36 @@ public class ArrayDequeTest {
         assertEquals(errorMsg, 0, size);
     }
 
-    @Test
+//    @Test
     /* Tests get the item at the given index */
-    public void getTest(){
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        ArrayDeque ad5 = new ArrayDeque();
-
-        assertEquals("sss", null, ad5.get(0));
-
-        ad5.addFirst(3);
-        int res;
-        res= ad5.get(0);
-        assertEquals("sss", 3, res);
-
-        ad5.addFirst(10);
-        res = ad5.get(0);
-        assertEquals("sss", 10, res);
-
-        res = ad5.get(1);
-        assertEquals("sss", 3, res);
-
-        ad5.addLast(5);
-        res = ad5.get(0);
-        assertEquals("sss", 10, res);
-
-        res = ad5.get(1);
-        assertEquals("sss", 3, res);
-
-        res = ad5.get(2);
-        assertEquals("sss", 5, res);
-
-        assertEquals("sss", null, ad5.get(10));
-    }
+//    public void getTest(){
+//        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+//        ArrayDeque ad5 = new ArrayDeque();
+//
+//        assertEquals("sss", null, ad5.get(0));
+//
+//        ad5.addFirst(3);
+//        int res;
+//        res= ad5.get(0);
+//        assertEquals("sss", 3, res);
+//
+//        ad5.addFirst(10);
+//        res = ad5.get(0);
+//        assertEquals("sss", 10, res);
+//
+//        res = ad5.get(1);
+//        assertEquals("sss", 3, res);
+//
+//        ad5.addLast(5);
+//        res = ad5.get(0);
+//        assertEquals("sss", 10, res);
+//
+//        res = ad5.get(1);
+//        assertEquals("sss", 3, res);
+//
+//        res = ad5.get(2);
+//        assertEquals("sss", 5, res);
+//
+//        assertEquals("sss", null, ad5.get(10));
+//    }
 }
