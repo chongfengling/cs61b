@@ -17,7 +17,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item){
         if (nextFirst == 0){ // at this time; nextLast - nextFirst = items.length - 1
-            resize(size + 10);
+            resize(items.length + 10);
         }
 
         items[nextFirst] = item;
@@ -27,7 +27,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item){
         if (nextLast == items.length){
-            resize(size + 10);
+            resize(items.length + 10);
         }
         items[nextLast] = item;
         nextLast += 1;
@@ -37,8 +37,8 @@ public class ArrayDeque<T> {
     // from [x x 0] or [0 x x] to [0 0 x x 0]
     private void resize(int capacity){
         T[] tmpItems = (T []) new Object[capacity];
-        int space = (int) (capacity - size) / 2;
-        System.arraycopy(items, 0, tmpItems, space, size);
+        int space = (int) (capacity - items.length) / 2;
+        System.arraycopy(items, 0, tmpItems, space, items.length);
         items = tmpItems;
         nextFirst += space;
         nextLast += space;
