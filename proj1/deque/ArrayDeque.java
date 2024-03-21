@@ -17,7 +17,8 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item){
         if (nextFirst == 0){ // at this time; nextLast - nextFirst = items.length - 1
-            resize(items.length + 10);
+            resize((int) (items.length * 2));
+            zip(10);
         }
 
         items[nextFirst] = item;
@@ -27,7 +28,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item){
         if (nextLast == items.length){
-            resize(items.length + 10);
+            resize((int) (items.length * 2));
         }
         items[nextLast] = item;
         nextLast += 1;
@@ -44,12 +45,14 @@ public class ArrayDeque<T> {
         nextLast += space;
     }
 
-    public void add(int item){
-
-    }
-
-    public void remove(int index){
-
+    private void zip(int space){
+        if (size / items.length < 0.25){ // if usage factor is lower than 25% in the array items
+            T[] tmpItems = (T []) new Object[size + space];
+            System.arraycopy(items, nextFirst, tmpItems, space, size);
+            items = tmpItems;
+            nextFirst = space;
+            nextLast = space + size;
+        }
     }
 
     public boolean isEmpty(){
