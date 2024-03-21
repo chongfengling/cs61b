@@ -44,6 +44,14 @@ public class ArrayDeque {
         nextLast += space;
     }
 
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+    public int size(){
+       return size;
+    }
+
     public void printDeque(){
         int startIndex = nextFirst + 1;
         while (startIndex < nextLast){
@@ -51,7 +59,35 @@ public class ArrayDeque {
             startIndex += 1;
         }
         System.out.println();
+    }
 
+    public Integer removeFirst(){
+        if (size > 0){
+            nextFirst += 1;
+            size += -1;
+            return items[nextFirst -1];
+        }else {
+            return null;
+        }
+
+    }
+
+    public Integer removeLast(){
+        if (size > 0){
+            nextLast -= 1;
+            size += -1;
+            return  items[nextLast + 1];
+        }else {
+            return null;
+        }
+
+    }
+    public Integer get(int index) {
+        if (index >= 0 && index < size) {
+            return items[index + nextFirst + 1];
+        }else {
+            return null;
+        }
     }
 
 }
