@@ -25,6 +25,15 @@ public class ArrayDeque {
         size += 1;
     }
 
+    public void addLast(int item){
+        if (nextLast >= items.length){
+            resize(size + 10);
+        }
+        items[nextLast] = item;
+        nextLast += 1;
+        size += 1;
+    }
+
     // from [x x 0] or [0 x x] to [0 0 x x 0]
     private void resize(int capacity){
         int[] tmpItems = new int[capacity];

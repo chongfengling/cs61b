@@ -14,7 +14,12 @@ public class ArrayDequeTest {
         ad1.addFirst(5);
         ad1.addFirst(6);
         ad1.addFirst(7);
-        ad1.addFirst(8);
+        ad1.addFirst(10);
+        ad1.addLast(8);
+        ad1.addLast(9);
+        ad1.addLast(10);
+        ad1.addLast(11);
+        ad1.addLast(0);
 
         ad1.printDeque();
     }
