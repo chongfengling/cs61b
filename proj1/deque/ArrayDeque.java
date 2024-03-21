@@ -37,7 +37,7 @@ public class ArrayDeque {
 
     public void printDeque(){
         int startIndex = nextFirst + 1;
-        while (items[startIndex] != 0){
+        while (startIndex < nextLast){
             System.out.print(items[startIndex] + " ");
             startIndex += 1;
         }
