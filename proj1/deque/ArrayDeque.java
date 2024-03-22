@@ -57,12 +57,7 @@ public class ArrayDeque<T> implements Deque<T>{
             nextLast = space + size;
         }
     }
-
-    @Override
-    public boolean isEmpty(){
-        return size == 0;
-    }
-
+    
     @Override
     public int size(){
        return size;
