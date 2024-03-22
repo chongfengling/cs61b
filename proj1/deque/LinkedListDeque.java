@@ -107,4 +107,25 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
         return currentNode.item;
     }
+
+
+    public T getRecursive(int index){
+        if (index >= size || index < 0){
+            return  null;
+        }
+        return getRecursive(index, sentinel.next);
+    }
+
+    private T getRecursive(int index, node currentNode){
+        if (index == 0){
+            return currentNode.item;
+        }
+        if (currentNode.next == null){
+            return null;
+        }
+        return getRecursive(index - 1, currentNode.next);
+    }
+
+
+
 }
