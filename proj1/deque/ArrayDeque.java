@@ -8,7 +8,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     private int size;
     private int nextFirst = 1; // nonzero
     private int nextLast = 2;
-    private int defaultLength = 6;
+    private int defaultLength = 8;
     private int zipSpace = 5; // spaces remained at the beginning and ending after zip the array
 
     public ArrayDeque(){
@@ -52,7 +52,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     //
     private void zip(int space){
-        if (size / items.length < 0.25){ // if usage factor is lower than 25% in the array items
+        if (size / items.length < 0.25 && items.length > 16){ // if usage factor is lower than 25% in the array items
             T[] tmpItems = (T []) new Object[size + space * 2];
             System.arraycopy(items, nextFirst + 1, tmpItems, space, size);
             items = tmpItems;
