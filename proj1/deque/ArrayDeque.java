@@ -35,6 +35,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     public void addLast(T item){
         if (nextLast == items.length){
             resize((int) (items.length * 2));
+            zip(zipSpace);
         }
         items[nextLast] = item;
         nextLast += 1;
@@ -82,6 +83,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         if (size > 0){
             nextFirst += 1;
             size += -1;
+            zip(zipSpace);
             return items[nextFirst];
         }else {
             return null;
@@ -94,6 +96,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         if (size > 0){
             nextLast -= 1;
             size += -1;
+            zip(zipSpace);
             return  items[nextLast];
         }else {
             return null;
