@@ -14,16 +14,13 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     public ArrayDeque(){
         items = (T []) new Object[defaultLength];
         size = 0;
-        // circular ArrayDeque
-//        nextFirst = 1;
-//        nextLast = 2;
     }
 
     @Override
     public void addFirst(T item){
         if (nextFirst == 0){ // at this time; nextLast - nextFirst = items.length - 1
             resize((int) (items.length * 2));
-            zip(zipSpace);
+//            zip(zipSpace);
         }
 
         items[nextFirst] = item;
@@ -35,7 +32,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     public void addLast(T item){
         if (nextLast == items.length){
             resize((int) (items.length * 2));
-            zip(zipSpace);
+//            zip(zipSpace);
         }
         items[nextLast] = item;
         nextLast += 1;
@@ -53,6 +50,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         nextLast += space;
     }
 
+    //
     private void zip(int space){
         if (size / items.length < 0.25){ // if usage factor is lower than 25% in the array items
             T[] tmpItems = (T []) new Object[size + space * 2];
@@ -81,9 +79,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     @Override
     public T removeFirst(){
         if (size > 0){
+            zip(zipSpace);
             nextFirst += 1;
             size += -1;
-            zip(zipSpace);
             return items[nextFirst];
         }else {
             return null;
@@ -94,9 +92,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     @Override
     public T removeLast(){
         if (size > 0){
+            zip(zipSpace);
             nextLast -= 1;
             size += -1;
-            zip(zipSpace);
             return  items[nextLast];
         }else {
             return null;
