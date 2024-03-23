@@ -1,6 +1,8 @@
 package deque;
+import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T>{
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
+
     private class node { // static or not?
         private node prev;
         private final T item;
@@ -126,6 +128,28 @@ public class LinkedListDeque<T> implements Deque<T>{
         return getRecursive(index - 1, currentNode.next);
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    private class LinkedListDequeIterator implements Iterator<T>{
+        private int wizPos;
+
+        public LinkedListDequeIterator(){
+            wizPos = 0;
+        }
+
+        public boolean hasNext(){
+            return wizPos < size;
+        }
+
+        public T next(){
+            T returnItem = get(wizPos);
+            wizPos += 1;
+            return returnItem;
+        }
+    }
 
 
 }
