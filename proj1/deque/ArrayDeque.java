@@ -133,4 +133,27 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         return new ArrayDequeIterator();
     }
 
+    @Override
+    public boolean equals(Object other){
+        if (this == other) {
+            return true;
+        }
+        // class check
+        if (!(other instanceof ArrayDeque)){
+            return false;
+        }
+        // size check
+        ArrayDeque<T> o = (ArrayDeque<T>) other;
+        if (this.size() != o.size()){
+            return false;
+        }
+        // items check
+        for (int index=0; index < size; index++){
+            if (this.get(index) != o.get(index)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
