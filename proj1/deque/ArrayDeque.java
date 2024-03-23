@@ -6,22 +6,24 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     private T[] items;
     private int size;
-    private int nextFirst; // nonzero
-    private int nextLast;
+    private int nextFirst = 1; // nonzero
+    private int nextLast = 2;
+    private int defaultLength = 6;
+    private int zipSpace = 5; // spaces remained at the beginning and ending after zip the array
 
     public ArrayDeque(){
-        items = (T []) new Object[6];
+        items = (T []) new Object[defaultLength];
         size = 0;
         // circular ArrayDeque
-        nextFirst = 1;
-        nextLast = 2;
+//        nextFirst = 1;
+//        nextLast = 2;
     }
 
     @Override
     public void addFirst(T item){
         if (nextFirst == 0){ // at this time; nextLast - nextFirst = items.length - 1
             resize((int) (items.length * 2));
-            zip(10);
+            zip(zipSpace);
         }
 
         items[nextFirst] = item;
