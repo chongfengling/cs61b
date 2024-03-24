@@ -58,7 +58,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     //
     private void zip(int space){
-        if (size / items.length < 0.25 && items.length > 16){ // if usage factor is lower than 25% in the array items
+        if (((double) size / items.length) < 0.25 && items.length > 16){ // if usage factor is lower than 25% in the array items
             T[] tmpItems = (T []) new Object[size + space * 2];
             System.arraycopy(items, nextFirst + 1, tmpItems, space, size);
             items = tmpItems;
@@ -154,7 +154,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
         // items check
         for (int index=0; index < size; index++){
-            if (this.get(index).equals(o.get(index))){
+            if (!(this.get(index).equals(o.get(index)))){
                 return false;
             }
         }
