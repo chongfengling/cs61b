@@ -154,7 +154,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
         // items check
         for (int index=0; index < size; index++){
-            if (this.get(index) != o.get(index)){
+            if (this.get(index).equals(o.get(index))){
                 return false;
             }
         }
