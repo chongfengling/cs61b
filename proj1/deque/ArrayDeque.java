@@ -19,8 +19,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     @Override
     public void addFirst(T item){
         if (nextFirst == 0){ // at this time; nextLast - nextFirst = items.length - 1
-            resize((int) (items.length * 2));
-//            zip(zipSpace);
+            resize(items.length, 0);
         }
 
         items[nextFirst] = item;
@@ -31,14 +30,12 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     @Override
     public void addLast(T item){
         if (nextLast == items.length){
-            resize((int) (items.length * 2));
-//            zip(zipSpace);
+            resize(0, items.length);
         }
         items[nextLast] = item;
         nextLast += 1;
         size += 1;
     }
-
 
     // from [x x 0] or [0 x x] to [0 0 x x 0]
     private void resize(int capacity){
@@ -48,6 +45,15 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         items = tmpItems;
         nextFirst += space;
         nextLast += space;
+    }
+
+    // option to add space at the front or the back
+    private void resize(int frontSpace, int backSpace){
+        T[] tmpItems = (T []) new Object[frontSpace + items.length + backSpace];
+        System.arraycopy(items, 0, tmpItems, frontSpace, items.length);
+        items = tmpItems;
+        nextFirst += frontSpace;
+        nextLast += frontSpace;
     }
 
     //
@@ -86,7 +92,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }else {
             return null;
         }
-
     }
 
     @Override
@@ -99,8 +104,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }else {
             return null;
         }
-
     }
+
     @Override
     public T get(int index) {
         if (index >= 0 && index < size) {
