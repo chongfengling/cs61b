@@ -140,20 +140,21 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     public boolean equals(Object other){
+        // memory address check
         if (this == other) {
             return true;
         }
         // class check
-        if (!(other instanceof ArrayDeque)){
+        if (!(other instanceof Deque)){
             return false;
         }
         // size check
-        ArrayDeque<T> o = (ArrayDeque<T>) other;
+        Deque<T> o = (Deque<T>) other;
         if (this.size() != o.size()){
             return false;
         }
         // items check
-        for (int index=0; index < size; index++){
+        for (int index = 0; index < this.size(); index++){
             if (!(this.get(index).equals(o.get(index)))){
                 return false;
             }
