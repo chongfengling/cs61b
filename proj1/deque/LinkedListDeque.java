@@ -3,10 +3,10 @@ import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
-    private class node { // static or not?
-        private node prev;
+    private class node<T> { // static or not?
+        private node<T> prev;
         private final T item;
-        private node next;
+        private node<T> next;
 
         private node(node i, T x, node j) {
             prev = i;
@@ -18,13 +18,11 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
             item = x;
             prev = this;
             next = this;
-
         }
     }
 
     private int size = 0;
-    private final node sentinel;
-
+    private final node<T> sentinel;
     public LinkedListDeque(){
         sentinel = new node(null);
     }
@@ -32,7 +30,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     @Override
     public  void addFirst(T item){
         size += 1;
-        node firstNode = new node(item);
+        node<T> firstNode = new node(item);
         firstNode.prev = sentinel;
         firstNode.next = sentinel.next;
         firstNode.next.prev = firstNode;
@@ -46,7 +44,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     @Override
     public void addLast(T item){
         size += 1;
-        node lastNode = new node(item);
+        node<T> lastNode = new node(item);
         lastNode.next = sentinel;
         lastNode.prev = sentinel.prev;
         lastNode.prev.next = lastNode;
@@ -86,7 +84,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     public void printDeque(){
-        node p = sentinel.next;
+        node<T> p = sentinel.next;
         while (p != sentinel){
             System.out.print(p.item + " ");
             p = p.next;
@@ -102,14 +100,13 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
         }
 
         int pos = 0;
-        node currentNode = sentinel.next;
+        node<T> currentNode = sentinel.next;
         while (pos != index){
             pos += 1;
             currentNode = currentNode.next;
         }
         return currentNode.item;
     }
-
 
     public T getRecursive(int index){
         if (index >= size || index < 0){
@@ -118,7 +115,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
         return getRecursive(index, sentinel.next);
     }
 
-    private T getRecursive(int index, node currentNode){
+    private T getRecursive(int index, node<T> currentNode){
         if (index == 0){
             return currentNode.item;
         }
