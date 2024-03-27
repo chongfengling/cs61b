@@ -127,23 +127,24 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new LinkedListDequeIterator();
     }
 
     private class LinkedListDequeIterator implements Iterator<T>{
-        private int wizPos;
-
+        private node<T> wizNode;
         public LinkedListDequeIterator(){
-            wizPos = 0;
+            wizNode = sentinel.next;
         }
 
+        @Override
         public boolean hasNext(){
-            return wizPos < size;
+            return wizNode.next != sentinel;
         }
 
+        @Override
         public T next(){
-            T returnItem = get(wizPos);
-            wizPos += 1;
+            T returnItem = wizNode.item;
+            wizNode = wizNode.next;
             return returnItem;
         }
     }
