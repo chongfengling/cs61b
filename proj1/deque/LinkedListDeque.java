@@ -138,7 +138,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
         @Override
         public boolean hasNext(){
-            return wizNode.next != sentinel;
+            return wizNode != sentinel;
         }
 
         @Override
