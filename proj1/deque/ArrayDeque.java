@@ -127,7 +127,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
 
         public T next(){
-            T returnItem = items[wizPos];
+            T returnItem = items[wizPos + nextFirst + 1];
             wizPos += 1;
             return returnItem;
         }
