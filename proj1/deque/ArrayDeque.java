@@ -122,10 +122,12 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
             wizPos = 0;
         }
 
+        @Override
         public boolean hasNext(){
             return wizPos < size;
         }
 
+        @Override
         public T next(){
             T returnItem = items[wizPos + nextFirst + 1];
             wizPos += 1;
