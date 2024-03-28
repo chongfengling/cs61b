@@ -1,6 +1,8 @@
 package capers;
 
 import java.io.File;
+import java.io.IOException;
+
 import static capers.Utils.*;
 
 /** A repository for Capers 
@@ -32,6 +34,23 @@ public class CapersRepository {
      */
     public static void setupPersistence() {
         // TODO
+        File STORY_FILE = new File(CAPERS_FOLDER, "story");
+        File DOGS_FOLDER = new File(CAPERS_FOLDER, "dogs");
+        if (!CAPERS_FOLDER.exists()) {
+            CAPERS_FOLDER.mkdir();
+        }
+
+        if (!STORY_FILE.exists()) {
+            try {
+                STORY_FILE.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (!DOGS_FOLDER.exists()) {
+            DOGS_FOLDER.mkdir();
+        }
     }
 
     /**
