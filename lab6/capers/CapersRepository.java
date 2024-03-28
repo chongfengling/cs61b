@@ -59,7 +59,10 @@ public class CapersRepository {
      * @param text String of the text to be appended to the story
      */
     public static void writeStory(String text) {
-        // TODO
+        // alternative: StringBuilder with append method
+        File STORY_FILE = new File(CAPERS_FOLDER, "story");
+        writeContents(STORY_FILE, readContentsAsString(STORY_FILE), text, System.lineSeparator());
+        System.out.println(readContentsAsString(STORY_FILE));
     }
 
     /**
