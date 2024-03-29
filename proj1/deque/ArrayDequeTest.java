@@ -93,24 +93,24 @@ public class ArrayDequeTest {
         assertEquals("Should have size 20", 20, arrayDeque.size());
     }
 
-//    @Test
-//    public void removeBigAmountTest() {
-//        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
-//
-//        int M = 1000000;
-//
-//        for (int i = 0; i < M; i++) {
-//            arrayDeque.addLast(i);
-//        }
-//
-//        assertEquals("Should have size 1000000", M, arrayDeque.size());
-//
-//        for (int i = 0; i < M; i++) {
-//            assertEquals("Should be equal", i, (int) arrayDeque.removeFirst());
-//        }
-//
-//        assertTrue("Should be empty", arrayDeque.isEmpty());
-//    }
+    @Test
+    public void removeBigAmountTest() {
+        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
+
+        int M = 1000000;
+
+        for (int i = 0; i < M; i++) {
+            arrayDeque.addLast(i);
+        }
+
+        assertEquals("Should have size 1000000", M, arrayDeque.size());
+
+        for (int i = 0; i < M; i++) {
+            assertEquals("Should be equal", i, (int) arrayDeque.removeFirst());
+        }
+
+        assertTrue("Should be empty", arrayDeque.isEmpty());
+    }
 
     @Test
     public void getTest() {
@@ -127,20 +127,20 @@ public class ArrayDequeTest {
         assertNull("Should be null when index out of bound", arrayDeque.get(20));
     }
 
-//    @Test
-//    public void getBigAmountTest() {
-//        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
-//
-//        int M = 1000000;
-//
-//        for (int i = 0; i < M; i++) {
-//            arrayDeque.addLast(i);
-//        }
-//
-//        for (int i = 0; i < M; i++) {
-//            assertEquals("Should be equal", i, (int) arrayDeque.get(i));
-//        }
-//    }
+    @Test
+    public void getBigAmountTest() {
+        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
+
+        int M = 1000000;
+
+        for (int i = 0; i < M; i++) {
+            arrayDeque.addLast(i);
+        }
+
+        for (int i = 0; i < M; i++) {
+            assertEquals("Should be equal", i, (int) arrayDeque.get(i));
+        }
+    }
 
 //    @Test
 //    public void iteratorTest() {

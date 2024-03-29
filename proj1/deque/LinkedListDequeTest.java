@@ -76,6 +76,17 @@ public class LinkedListDequeTest {
     }
 
     @Test
+    public void getTest(){
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 10000; i++) {
+            lld1.addLast(i);
+        }
+        int index = 1999;
+        assertEquals("getWrong", index, (int) lld1.get(index));
+        assertEquals("getRecursive(Wrong", index, (int) lld1.getRecursive(index));
+    }
+
+    @Test
     /* Check if you can create LinkedListDeques with different parameterized types*/
     public void multipleParamTest() {
 
