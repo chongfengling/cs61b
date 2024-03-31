@@ -1,20 +1,10 @@
 package deque;
-
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ArrayDequeTest {
-
-//    @Test
-//    public void nonEmptyInstantiationTest() {
-//        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
-//
-//        assertFalse("Should not be empty", arrayDeque.isEmpty());
-//        assertEquals("Should have size 1", 1, arrayDeque.size());
-//    }
-
     @Test
     public void addTest() {
         ArrayDeque<String> arrayDeque = new ArrayDeque<>();
@@ -23,13 +13,10 @@ public class ArrayDequeTest {
 
         arrayDeque.addFirst("front");
         assertEquals("Should have size 1", 1, arrayDeque.size());
-
         arrayDeque.addLast("middle");
         assertEquals("Should have size 2", 2, arrayDeque.size());
-
         arrayDeque.addLast("back");
         assertEquals("Should have size 3", 3, arrayDeque.size());
-
         System.out.println("Printing out deque: ");
         arrayDeque.printDeque();
     }
