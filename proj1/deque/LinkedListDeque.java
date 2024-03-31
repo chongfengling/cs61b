@@ -1,20 +1,20 @@
 package deque;
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
-    private class node<T> { // static or not?
-        private node<T> prev;
+    private class Node<T> { // static or not?
+        private Node<T> prev;
         private final T item;
-        private node<T> next;
+        private Node<T> next;
 
-        private node(node i, T x, node j) {
+        private Node(Node i, T x, Node j) {
             prev = i;
             item = x;
             next = j;
         }
 
-        private node(T x){
+        private Node(T x) {
             item = x;
             prev = this;
             next = this;
@@ -22,70 +22,70 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     }
 
     private int size = 0;
-    private final node<T> sentinel;
-    public LinkedListDeque(){
-        sentinel = new node(null);
+    private final Node<T> sentinel;
+    public LinkedListDeque() {
+        sentinel = new Node(null);
     }
 
     @Override
-    public  void addFirst(T item){
+    public  void addFirst(T item) {
         size += 1;
-        node<T> firstNode = new node(item);
+        Node<T> firstNode = new Node(item);
         firstNode.prev = sentinel;
         firstNode.next = sentinel.next;
         firstNode.next.prev = firstNode;
 
         sentinel.next = firstNode;
-        if (sentinel.prev == sentinel){
+        if (sentinel.prev == sentinel) {
             sentinel.prev = firstNode;
         }
     }
 
     @Override
-    public void addLast(T item){
+    public void addLast(T item) {
         size += 1;
-        node<T> lastNode = new node(item);
+        Node<T> lastNode = new Node(item);
         lastNode.next = sentinel;
         lastNode.prev = sentinel.prev;
         lastNode.prev.next = lastNode;
 
         sentinel.prev = lastNode;
-        if (sentinel.next == sentinel){
+        if (sentinel.next == sentinel) {
             sentinel.next = lastNode;
         }
     }
 
     @Override
-    public T removeFirst(){
+    public T removeFirst() {
         T removedItem = sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
-        if (size > 0){
+        if (size > 0) {
             size += -1;
         }
         return removedItem;
     }
 
     @Override
-    public T removeLast(){
+    public T removeLast() {
         T removedItem = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
-        if (size > 0){
+        if (size > 0) {
             size += -1;
         }
         return removedItem;
     }
 
     @Override
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
-    public void printDeque(){
-        node<T> p = sentinel.next;
-        while (p != sentinel){
+    public void printDeque() {
+        Node<T> p = sentinel.next;
+        while (p != sentinel) {
             System.out.print(p.item + " ");
             p = p.next;
         }
@@ -94,32 +94,32 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     // 0 is front while 1 is the next item
-    public T get(int index){
-        if (index >= size || index < 0){
+    public T get(int index) {
+        if (index >= size || index < 0) {
             return  null;
         }
 
         int pos = 0;
-        node<T> currentNode = sentinel.next;
-        while (pos != index){
+        Node<T> currentNode = sentinel.next;
+        while (pos != index) {
             pos += 1;
             currentNode = currentNode.next;
         }
         return currentNode.item;
     }
 
-    public T getRecursive(int index){
-        if (index >= size || index < 0){
+    public T getRecursive(int index) {
+        if (index >= size || index < 0) {
             return  null;
         }
         return getRecursive(index, sentinel.next);
     }
 
-    private T getRecursive(int index, node<T> currentNode){
-        if (index == 0){
+    private T getRecursive(int index, Node<T> currentNode) {
+        if (index == 0) {
             return currentNode.item;
         }
-        if (currentNode.next == null){
+        if (currentNode.next == null) {
             return null;
         }
         return getRecursive(index - 1, currentNode.next);
@@ -130,19 +130,19 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
         return new LinkedListDequeIterator();
     }
 
-    private class LinkedListDequeIterator implements Iterator<T>{
-        private node<T> wizNode;
-        public LinkedListDequeIterator(){
+    private class LinkedListDequeIterator implements Iterator<T> {
+        private Node<T> wizNode;
+        public LinkedListDequeIterator() {
             wizNode = sentinel.next;
         }
 
         @Override
-        public boolean hasNext(){
+        public boolean hasNext() {
             return wizNode != sentinel;
         }
 
         @Override
-        public T next(){
+        public T next() {
             T returnItem = wizNode.item;
             wizNode = wizNode.next;
             return returnItem;
@@ -150,23 +150,23 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         // memory address check
-        if (this == other){
+        if (this == other) {
             return true;
         }
         // class check
-        if(!(other instanceof Deque)){
+        if (!(other instanceof Deque)) {
             return false;
         }
         // size check
         Deque<T> o = (Deque<T>) other;
-        if (this.size() != o.size()){
+        if (this.size() != o.size()) {
             return false;
         }
         // items check
-        for (int index = 0; index < this.size(); index++){
-            if (!(this.get(index).equals(o.get(index)))){
+        for (int index = 0; index < this.size(); index++) {
+            if (!(this.get(index).equals(o.get(index)))) {
                 return false;
             }
         }
