@@ -32,7 +32,7 @@ public class Commit implements Serializable {
         this.message = message;
         // no parentID for the first commit
         this.parentID = null;
-        this.author = System.getProperty("user.name");
+        this.author = "Chongfeng";
         // timestamp of the first commit is time 0
         this.dateStamp = new Date(0);
     }
