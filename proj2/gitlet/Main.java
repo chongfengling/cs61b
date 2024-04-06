@@ -17,7 +17,10 @@ public class Main {
         String firstArg = args[0];
         switch(firstArg) {
             case "init":
-                // TODO: handle the `init` command
+                // usage: java gitlet.Main init
+                // in git, second args will create new folder and init it while more than 2 args will exit with error.
+                // error message is init usage
+                Repository.initCommand();
                 break;
             case "add":
                 // TODO: handle the `add [filename]` command

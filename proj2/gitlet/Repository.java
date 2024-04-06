@@ -3,11 +3,13 @@ package gitlet;
 import java.io.File;
 import static gitlet.Utils.*;
 
-// TODO: any imports you need here
-
 /** Represents a gitlet repository.
- *  TODO: It's a good idea to give a description here of what else this Class
- *  does at a high level.
+ * .gitlet/ -- top level folder for all persistent data required for version control initialized by `gitlet init`
+ *    - HEAD     -- the current branch
+ *    - index    -- staging area
+ *    - objects/ -- all "objects", including blob (files), trees (directories), commits (reference to a tree,
+ *    parent commit, etc.)
+ *    - refs/    -- pointers to commit objects
  *
  *  @author Chongfeng Ling
  */
@@ -27,8 +29,31 @@ public class Repository {
 
     public static final File OBJECTS_DIR = join(GITLET_DIR, "objects");
 
+    public static final File REFS_DIR = join(GITLET_DIR, "refs");
+
     public static void gitletHelp() {
         System.out.println("Gitlet help message.");
+    }
+
+    /*
+    * TODO: start with one commit with no files.
+    * TODO: commit message "initial commit"
+    * TODO: single current branch: master
+    * TODO: timestamp: time 0
+    * TODO: Failure case: already a repo and return error message
+     * */
+    public static void initCommand() {
+        // when there is already a repo, abort.
+        if (GITLET_DIR.exists()) {
+            Utils.message("A gitlet version-control system already exists in the current directory.");
+            System.exit(0);
+        } else {
+            GITLET_DIR.mkdir();
+            OBJECTS_DIR.mkdir();
+            REFS_DIR.mkdir();
+            initCommand("initial commit");
+        }
+        return;
     }
 
     private static void initCommand(String message) {
