@@ -25,8 +25,21 @@ public class Repository {
     /** The .gitlet directory. */
     public static final File GITLET_DIR = join(CWD, ".gitlet");
 
+    public static final File OBJECTS_DIR = join(GITLET_DIR, "objects");
+
     public static void gitletHelp() {
         System.out.println("Gitlet help message.");
     }
 
+    private static void initCommand(String message) {
+        Commit commit = new Commit(message);
+        String sha1Code = Utils.sha1(commit.toString());
+        File COMMIT_DIR = Utils.join(OBJECTS_DIR, sha1Code.substring(0, 2));
+        // storage location based on the commit's sha1 code
+        if (!COMMIT_DIR.exists()) {
+            COMMIT_DIR.mkdir();
+        }
+        File commitFile = Utils.join(COMMIT_DIR, sha1Code.substring(2, sha1Code.length()));
+        Utils.writeObject(commitFile, commit);
+    }
 }
