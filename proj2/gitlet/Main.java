@@ -1,7 +1,7 @@
 package gitlet;
 
 /** Driver class for Gitlet, a subset of the Git version-control system.
- *  @author TODO
+ *  @author Chongfeng Ling
  */
 public class Main {
 
@@ -9,7 +9,11 @@ public class Main {
      *  <COMMAND> <OPERAND1> <OPERAND2> ... 
      */
     public static void main(String[] args) {
-        // TODO: what if args is empty?
+        // When args is empty, display help message and exit.
+        if (args.length == 0) {
+            Repository.gitletHelp();
+            return;
+        }
         String firstArg = args[0];
         switch(firstArg) {
             case "init":
