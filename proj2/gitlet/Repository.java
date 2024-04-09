@@ -1,6 +1,7 @@
 package gitlet;
 
 import java.io.File;
+import java.io.IOException;
 import static gitlet.Utils.*;
 
 /** Represents a gitlet repository.
@@ -25,6 +26,13 @@ public class Repository {
 
     public static final File REFS_DIR = join(GITLET_DIR, "refs");
 
+    public static final File HEAD_F = join(GITLET_DIR, "HEAD");
+
+    public static final File INDEX_F = join(GITLET_DIR, "index");
+
+    public static final File REFS_HEADS_F = join(REFS_DIR, "heads");
+
+
     public static void gitletHelp() {
         System.out.println("Gitlet help message.");
     }
@@ -38,9 +46,7 @@ public class Repository {
             Utils.message("A gitlet version-control system already exists in the current directory.");
             System.exit(0);
         } else {
-            GITLET_DIR.mkdir();
-            OBJECTS_DIR.mkdir();
-            REFS_DIR.mkdir();
+            initGitlet();
             initCommand("initial commit");
         }
         return;
@@ -70,6 +76,21 @@ public class Repository {
         if (!f.exists()) {
             Utils.error("File does not exist");
             System.exit(0);
+        }
+    }
+
+    // initialize the folder .gitlet
+    // create several folders and files inside .gitlet
+    private static void initGitlet() {
+        GITLET_DIR.mkdir();
+        OBJECTS_DIR.mkdir();
+        REFS_DIR.mkdir();
+        try {
+            HEAD_F.createNewFile();
+            INDEX_F.createNewFile();
+            REFS_HEADS_F.createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating the files");
         }
     }
 
