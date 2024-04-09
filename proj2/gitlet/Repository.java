@@ -5,22 +5,16 @@ import static gitlet.Utils.*;
 
 /** Represents a gitlet repository.
  * .gitlet/ -- top level folder for all persistent data required for version control initialized by `gitlet init`
- *    - HEAD     -- the current branch
- *    - index    -- staging area
- *    - objects/ -- all "objects", including blob (files), trees (directories), commits (reference to a tree,
+ *    - HEAD      -- HEAD of current branch
+ *    - index     -- staging area
+ *    - objects/  -- all "objects", including blob (files), trees (directories), commits (reference to a tree,
  *    parent commit, etc.)
- *    - refs/    -- pointers to commit objects
+ *    - refs/     -- pointers to commit objects
+ *      - heads/  -- HEADs of each branch
  *
  *  @author Chongfeng Ling
  */
 public class Repository {
-    /**
-     * TODO: add instance variables here.
-     *
-     * List all instance variables of the Repository class here with a useful
-     * comment above them describing what that variable represents and how that
-     * variable is used. We've provided two examples for you.
-     */
 
     /** The current working directory. */
     public static final File CWD = new File(System.getProperty("user.dir"));
@@ -36,11 +30,7 @@ public class Repository {
     }
 
     /*
-    * TODO: start with one commit with no files.
-    * TODO: commit message "initial commit"
-    * TODO: single current branch: master
-    * TODO: timestamp: time 0
-    * TODO: Failure case: already a repo and return error message
+     * TODO: single current branch: master
      * */
     public static void initCommand() {
         // when there is already a repo, abort.
@@ -54,6 +44,14 @@ public class Repository {
             initCommand("initial commit");
         }
         return;
+    }
+
+    public static void addCommand(String fileName) {
+        // check if to be added file exists
+        File f = Utils.join(CWD, fileName);
+        checkFileExistence(f);
+    }
+
     }
 
     private static void initCommand(String message) {

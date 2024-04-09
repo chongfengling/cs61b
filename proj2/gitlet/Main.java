@@ -22,7 +22,10 @@ public class Main {
                 Repository.initCommand();
                 break;
             case "add":
-                // TODO: handle the `add [filename]` command
+                // usage: java gitlet.Main add [filename]
+                // in gitlet, only one file can be added at a time
+                validateNumArgs(args, 2);
+                Repository.addCommand(args[1]);
                 break;
 
         }
