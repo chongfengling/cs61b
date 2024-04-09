@@ -67,4 +67,12 @@ public class Repository {
         File commitFile = Utils.join(COMMIT_DIR, sha1Code.substring(2, sha1Code.length()));
         Utils.writeObject(commitFile, commit);
     }
+
+    private static void checkFileExistence(File f) {
+        if (!f.exists()) {
+            Utils.error("File does not exist");
+            System.exit(0);
+        }
+    }
+
 }
