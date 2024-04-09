@@ -18,14 +18,27 @@ public class Main {
         switch(firstArg) {
             case "init":
                 // usage: java gitlet.Main init
-                // in git, second args will create new folder and init it while more than 2 args will exit with error.
-                // error message is init usage
+                validateNumArgs(args, 1);
                 Repository.initCommand();
                 break;
             case "add":
                 // TODO: handle the `add [filename]` command
                 break;
-            // TODO: FILL THE REST IN
+
+        }
+    }
+
+    /*
+    * Checks the number of arguments versus the expected number,
+    * exit if they do not match
+    *
+    * @param args: Argument array from command line
+    * @param n: Number of expected arguments
+    * */
+    private static void validateNumArgs(String[] args, int n) {
+        if (args.length != n) {
+            Utils.message("Length of arguments doesn't match the expected value.");
+            System.exit(0);
         }
     }
 }
