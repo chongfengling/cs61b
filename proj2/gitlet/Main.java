@@ -27,6 +27,14 @@ public class Main {
                 validateNumArgs(args, 2);
                 Repository.addCommand(args[1]);
                 break;
+            case "commit":
+                // usage: java gitlet.Main commit [message]
+                if (args.length != 2) {
+                    Utils.message("Please enter a commit message.");
+                    System.exit(0);
+                }
+                Repository.commitCommand(args[1]);
+                break;
             case "status":
                 // usage: java gitlet.Main status
                 validateNumArgs(args, 1);

@@ -60,6 +60,12 @@ public class Repository {
         checkFileExistence(f);
         stagingForAddition(f);
     }
+
+    // TODO: check staging area
+    public static void commitCommand(String message) {
+        // check staging area
+    }
+
     /* Display status as follow:
      * === Branches ===
      * === Staged Files ===
