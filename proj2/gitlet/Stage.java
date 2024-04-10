@@ -66,6 +66,12 @@ public class Stage implements Serializable {
         }
         System.out.println();
     }
+    // check if there are any files are staged.
+    public boolean isEmpty() {
+        if (this.size == 0) {
+            return true;
+        }
+        return false;
 
     }
 }
