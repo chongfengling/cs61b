@@ -29,15 +29,6 @@ public class Stage implements Serializable {
         this.additionalStage.remove(b.getFileID(), b.getFileContent());
     }
 
-    public void read(File f) {
-        Stage stage = Utils.readObject(f, this.getClass());
-        if (!(stage == null)) {
-            this.additionalStage = stage.additionalStage;
-            this.removalStage = stage.removalStage;
-            this.size = stage.size;
-        }
-    }
-
     public void save(File f) {
         Utils.writeObject(f, this);
     }
@@ -52,5 +43,9 @@ public class Stage implements Serializable {
 
     public int getSize() {
         return this.size;
+    }
+
+    public static Stage fromFile(File f) {
+        return Utils.readObject(f, Stage.class);
     }
 }
