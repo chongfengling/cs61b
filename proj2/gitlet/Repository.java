@@ -30,7 +30,7 @@ public class Repository {
 
     public static final File INDEX_F = join(GITLET_DIR, "index");
 
-    public static final File REFS_HEADS_F = join(REFS_DIR, "heads");
+    public static final File REFS_HEADS = join(REFS_DIR, "heads");
 
 
     public static void gitletHelp() {
@@ -100,10 +100,10 @@ public class Repository {
         OBJECTS_DIR.mkdir();
         REFS_DIR.mkdir();
         try {
-            // TODO: readObject() from a new file will fail
+            // TODO: write an empty String into the file rather than create it.
             HEAD_F.createNewFile();
-            Utils.writeObject(INDEX_F, new Stage());
-            REFS_HEADS_F.createNewFile();
+            Utils.writeObject(INDEX_F, new Stage()); // readObject() from an empty file will fail
+            REFS_HEADS.mkdir();
         } catch (IOException e) {
             System.out.println("An error occurred while creating the files");
         }
