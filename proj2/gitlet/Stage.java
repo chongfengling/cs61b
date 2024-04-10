@@ -52,11 +52,20 @@ public class Stage implements Serializable {
     }
 
     public void status() {
+        // print files' name in the additional stage
         System.out.println("=== Staged Files ===");
         for (String key : this.additionalStage.keySet()) {
             String value = this.additionalStage.get(key);
             System.out.println(value);
         }
         System.out.println();
+        // print files' name in the removal stage
+        System.out.println("=== Removed Files ===");
+        for (String key : this.removalStage.keySet()) {
+            String value = this.removalStage.get(key);
+            System.out.println(value);
+        }
+        System.out.println();
+    }
     }
 }
