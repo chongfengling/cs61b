@@ -68,7 +68,7 @@ public class Repository {
 
     private static void checkFileExistence(File f) {
         if (!f.exists()) {
-            Utils.error("File does not exist");
+            Utils.message("File does not exist");
             System.exit(0);
         }
     }
