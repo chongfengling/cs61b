@@ -80,8 +80,9 @@ public class Repository {
         OBJECTS_DIR.mkdir();
         REFS_DIR.mkdir();
         try {
+            // TODO: readObject() from a new file will fail
             HEAD_F.createNewFile();
-            INDEX_F.createNewFile();
+            Utils.writeObject(INDEX_F, new Stage());
             REFS_HEADS_F.createNewFile();
         } catch (IOException e) {
             System.out.println("An error occurred while creating the files");
