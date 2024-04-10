@@ -25,7 +25,7 @@ public class Commit implements Serializable {
     /** use TreeMap to represent the tree object associated with the commit.
      *  each commit points to a tree object, records blob identifier, path names and metadata.
      * */
-    private TreeMap tree;
+    private TreeMap blobRefs;
 
     // constructor 1: work for initial commit
     public Commit(String message) {
@@ -35,21 +35,24 @@ public class Commit implements Serializable {
         this.author = "Chongfeng";
         // timestamp of the first commit is time 0
         this.dateStamp = new Date(0);
-        this.tree = new TreeMap();
+        this.blobRefs = new TreeMap();
         generateCommitID();
     }
+
     // generate commitID by log message, metadata (date, author), tree reference, parentID.
     private void generateCommitID() {
         List<Object> vals = new ArrayList<>();
         vals.add(this.message);
         vals.add(this.dateStamp.toString());
         vals.add(this.author);
-        vals.add(this.tree.toString()); // TODO: 1. verify. 2. add blobs to the tree
+        vals.add(this.blobRefs.toString()); // TODO: 1. verify. 2. add blobs to the tree
         vals.add(this.parentID);
         this.commitID = Utils.sha1(vals);
     }
 
-    // save commit object to file located in .gitlet/Objects/
+    // save commit object to file located in .gitlet/Objects/<sha1 code>
+    // save commitID in the file HEAD and current branch
+    // TODO: save commitID of current branch located in .gitlet/refs/<head>
     public void save() {
         File COMMIT_DIR = Utils.join(Repository.OBJECTS_DIR, this.commitID.substring(0, 2));
         // storage location based on the sha1 code of the commit
@@ -58,5 +61,7 @@ public class Commit implements Serializable {
         }
         File commitObject = Utils.join(COMMIT_DIR, this.commitID.substring(2, this.commitID.length()));
         Utils.writeObject(commitObject, toString()); // TODO: override toString()
+        // save commitID in the file HEAD and current branch
+        Utils.writeContents(Repository.HEAD_F, this.commitID);
     }
 }
