@@ -57,13 +57,21 @@ public class Repository {
         // check if to be added file exists
         File f = Utils.join(CWD, fileName);
         checkFileExistence(f);
+        stagingForAddition(f);
     }
-
-    }
+    /* Help Functions */
 
     private static void initCommand(String message) {
         Commit commit = new Commit(message);
         commit.save();
+    }
+
+    // read and save current blob into stage area
+    private static void stagingForAddition(File f) {
+        Stage stage = Stage.fromFile(INDEX_F);
+        Blob blob = new Blob(f);
+        stage.add(blob);
+        stage.save(INDEX_F);
     }
 
     private static void checkFileExistence(File f) {
