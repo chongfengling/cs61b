@@ -27,6 +27,11 @@ public class Main {
                 validateNumArgs(args, 2);
                 Repository.addCommand(args[1]);
                 break;
+            case "status":
+                // usage: java gitlet.Main status
+                validateNumArgs(args, 1);
+                Repository.statusCommand();
+                break;
 
         }
     }

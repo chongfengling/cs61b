@@ -59,6 +59,17 @@ public class Repository {
         checkFileExistence(f);
         stagingForAddition(f);
     }
+    /* Display status as follow:
+     * === Branches ===
+     * === Staged Files ===
+     * === Removed Files ===
+     * === Modifications Not Staged For Commit ===
+     * === Untracked Files ===
+     * */
+    public static void statusCommand() {
+        Stage stage = Stage.fromFile(INDEX_F);
+        stage.status();
+    }
     /* Help Functions */
 
     private static void initCommand(String message) {
