@@ -8,7 +8,7 @@ public class Stage implements Serializable {
     /*
     * create Stage inside the file INDEX for staging (additional & removal)
     * support read/save from/to the file INDEX
-    * This Stage stores sha1 code as tree's key and file name as the value.
+    * This Stage stores file name as tree's key and sha1 code as the value.
     * */
 
     private TreeMap<String, String> additionalStage;
@@ -21,15 +21,16 @@ public class Stage implements Serializable {
         size = 0;
     }
 
+    // TODO: identical file (changed back after it was changed and added)
     public void add(Blob b) {
-        this.additionalStage.put(b.getFileID(), b.getFileName());
+        this.additionalStage.put(b.getFileName(), b.getFileID());
         this.size += 1;
     }
 
-    public void remove(Blob b) {
-        this.additionalStage.remove(b.getFileID(), b.getFileName());
-        this.size += -1;
-    }
+    // public void remove(Blob b) {
+    //     this.additionalStage.remove(b.getFileName(), b.getFileID());
+    //     this.size += -1;
+    // }
 
     public void save(File f) {
         Utils.writeObject(f, this);
@@ -55,17 +56,16 @@ public class Stage implements Serializable {
         // print files' name in the additional stage
         System.out.println("=== Staged Files ===");
         for (String key : this.additionalStage.keySet()) {
-            String value = this.additionalStage.get(key);
-            System.out.println(value);
+            System.out.println(key);
         }
         System.out.println();
         // print files' name in the removal stage
         System.out.println("=== Removed Files ===");
         for (String key : this.removalStage.keySet()) {
-            String value = this.removalStage.get(key);
-            System.out.println(value);
+            System.out.println(key);
         }
         System.out.println();
     }
+
     }
 }

@@ -53,6 +53,7 @@ public class Repository {
         return;
     }
 
+    // TODO: identical file (changed back after it was changed and added)
     public static void addCommand(String fileName) {
         // check if to be added file exists
         File f = Utils.join(CWD, fileName);
