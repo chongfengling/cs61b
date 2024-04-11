@@ -64,6 +64,13 @@ public class Repository {
     // TODO: check staging area
     public static void commitCommand(String message) {
         // check staging area
+        Stage stage = checkStagingArea();
+        // create a default commit from HEAD pointer
+        Commit commit = Commit.fromFile(HEAD_F);
+        // TODO: update the commit
+        // commit.update(stage, message);
+        // TODO: clear stage
+        // stage.clear()
     }
 
     /* Display status as follow:
