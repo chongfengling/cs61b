@@ -3,7 +3,6 @@ package gitlet;
 import java.io.File;
 import java.io.Serializable;
 import java.util.*;
-import static gitlet.Utils.*;
 
 /** Represents a gitlet commit object.
  *  TODO: It's a good idea to give a description here of what else this Class
@@ -54,14 +53,23 @@ public class Commit implements Serializable {
     // save commitID in the file HEAD and current branch
     // TODO: save commitID of current branch located in .gitlet/refs/<head>
     public void save() {
-        File COMMIT_DIR = Utils.join(Repository.OBJECTS_DIR, this.commitID.substring(0, 2));
-        // storage location based on the sha1 code of the commit
-        if (!COMMIT_DIR.exists()) {
-            COMMIT_DIR.mkdir();
-        }
-        File commitObject = Utils.join(COMMIT_DIR, this.commitID.substring(2, this.commitID.length()));
-        Utils.writeObject(commitObject, toString()); // TODO: override toString()
+        // save commit object to file located in .gitlet/Objects/<sha1 code>
+        File commitObject = commitObject_F(this.commitID);
+        Utils.writeObject(commitObject, this);
         // save commitID in the file HEAD and current branch
         Utils.writeContents(Repository.HEAD_F, this.commitID);
     }
+
+    private static File commitObject_DIR(String sha1Code) {
+        return Utils.join(Repository.OBJECTS_DIR, sha1Code.substring(0, 2));
+    }
+
+    private static File commitObject_F(String sha1Code) {
+        File COMMIT_DIR = commitObject_DIR(sha1Code);
+        if (!COMMIT_DIR.exists()) {
+            COMMIT_DIR.mkdir();
+        }
+        return Utils.join(COMMIT_DIR, sha1Code.substring(2, sha1Code.length()));
+    }
+
 }
