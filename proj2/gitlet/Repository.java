@@ -30,7 +30,7 @@ public class Repository {
 
     public static final File INDEX_F = join(GITLET_DIR, "index");
 
-    public static final File REFS_HEADS = join(REFS_DIR, "heads");
+    public static final File HEADS_DIR = join(REFS_DIR, "heads");
 
 
     public static void gitletHelp() {
@@ -39,6 +39,7 @@ public class Repository {
 
     /*
      * TODO: single current branch: master
+     * TODO: HEAD
      * */
     public static void initCommand() {
         // when there is already a repo, abort.
@@ -50,7 +51,6 @@ public class Repository {
             Commit commit = new Commit("initial commit");
             commit.save();
         }
-        return;
     }
 
     // TODO: identical file (changed back after it was changed and added)
@@ -109,7 +109,7 @@ public class Repository {
             // TODO: write an empty String into the file rather than create it.
             HEAD_F.createNewFile();
             Utils.writeObject(INDEX_F, new Stage()); // readObject() from an empty file will fail
-            REFS_HEADS.mkdir();
+            HEADS_DIR.mkdir();
         } catch (IOException e) {
             System.out.println("An error occurred while creating the files");
         }
