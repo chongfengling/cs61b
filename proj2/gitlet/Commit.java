@@ -72,4 +72,29 @@ public class Commit implements Serializable {
         return Utils.join(COMMIT_DIR, sha1Code.substring(2, sha1Code.length()));
     }
 
+    public static Commit fromFile(File f) {
+        String headCommitID = Utils.readContentsAsString(f);
+        return Utils.readObject(commitObject_F(headCommitID), Commit.class);
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public String getCommitID() {
+        return this.commitID;
+    }
+
+    public String getParentID() {
+        return this.parentID;
+    }
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public String getDataStamp() {
+        return this.dateStamp.toString();
+    }
+
 }
