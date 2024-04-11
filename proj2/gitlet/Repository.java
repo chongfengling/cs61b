@@ -99,6 +99,17 @@ public class Repository {
         }
     }
 
+    // if staging area is not empty, read and return the Stage
+    // else print error.
+    private static Stage checkStagingArea() {
+        Stage stage = Stage.fromFile(INDEX_F);
+        if (stage.isEmpty()) {
+            Utils.message("No changes added to the commit.");
+            System.exit(0);
+        }
+        return stage;
+    }
+
     // initialize the folder .gitlet
     // create several folders and files inside .gitlet
     private static void initGitlet() {
