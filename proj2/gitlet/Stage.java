@@ -36,6 +36,13 @@ public class Stage implements Serializable {
         Utils.writeObject(f, this);
     }
 
+    public void clear() {
+        this.size = 0;
+        this.additionalStage.clear();
+        this.removalStage.clear();
+        save(Repository.INDEX_F);
+    }
+
     public TreeMap getAdditionalStage() {
         return this.additionalStage;
     }
